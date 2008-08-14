@@ -1,0 +1,12 @@
+History.txt
+License.txt
+Manifest.txt
+PostInstall.txt
+README.txt
+Rakefile
+bin/twitterscrobble
+lib/twitterscrobble.rb
+lib/twitterscrobble/preferences.rb
+lib/twitterscrobble/status_line.rb
+lib/twitterscrobble/twitter_scrobbler.rb
+lib/twitterscrobble/version.rb

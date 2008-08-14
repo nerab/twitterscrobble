@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+#
+#  Created by Nicholas E. Rabenau on 2008-8-14.
+#  Copyright (c) 2008. All rights reserved.
+
+begin
+  require 'rubygems'
+rescue LoadError
+  # no rubygems to load, so we fail silently
+end
+
+$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+require 'twitterscrobble'
+
+begin
+    prefs = Twitterscrobble::Preferences.new
+    Twitterscrobble::TwitterScrobbler.new(prefs).update
+    prefs.save
+#rescue
+#    $stderr.puts "\nError: #{$!}"
+end
