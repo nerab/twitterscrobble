@@ -16,6 +16,6 @@ begin
     prefs = Twitterscrobble::Preferences.new
     Twitterscrobble::TwitterScrobbler.new(prefs).update
     prefs.save
-#rescue
-#    $stderr.puts "\nError: #{$!}"
+rescue
+    $stderr.puts "\nError: #{$!}"
 end
