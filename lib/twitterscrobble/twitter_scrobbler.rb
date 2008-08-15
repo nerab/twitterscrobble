@@ -6,7 +6,8 @@ module Twitterscrobble
   # Read the latest tracks of a user from last.fm and post them to Twitter.
   #
   class TwitterScrobbler
-  
+      TWITTER_SOURCE_PARAM = "twitterscrobble"
+
       def initialize(prefs)
           @prefs = prefs
           @logger = @prefs.logger
@@ -41,7 +42,7 @@ module Twitterscrobble
                       puts status
                   else
                       @logger.info("Posting new status: '#{status}'")
-                      Twitter::Base.new(@prefs.twitter_user, @prefs.twitter_password).update(status)
+                      Twitter::Base.new(@prefs.twitter_user, @prefs.twitter_password).update(status, {:source => TWITTER_SOURCE_PARAM})
                   end
   
                   @prefs.history = track.date_uts.to_i

@@ -5,9 +5,8 @@ require 'active_support'
 
 module Twitterscrobble
   class Preferences
-      VERSION = '0.0.2'
       PREFERENCES_FILE_NAME = "preferences.yaml"
-      APP_NAME = "twitterScrobble"
+      APP_NAME = "twitterscrobble"
       TO_BE_SAVED = [:history, :twitter_user, :scrobbler_user, :twitter_password]
   
       attr_reader :logger
@@ -139,7 +138,7 @@ module Twitterscrobble
               end
   
               opts.on("-v", "--version", "Prints the version of this script and exits") do |v|
-                  puts "#{File.basename(__FILE__)} version #{VERSION}"
+                  puts "#{Twitterscrobble.name}, v.#{VERSION::STRING}"
                   exit
               end
   
