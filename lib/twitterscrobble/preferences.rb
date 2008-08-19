@@ -4,6 +4,13 @@ require 'logger'
 require 'active_support'
 
 module Twitterscrobble
+  
+  class SimpleLogger < Logger
+    def format_message(severity, timestamp, progname, msg)
+      "#{timestamp.to_s(:db)} #{severity} #{msg}\n" 
+    end 
+  end 
+  
   class Preferences
       PREFERENCES_FILE_NAME = "preferences.yaml"
       APP_NAME = "twitterscrobble"
@@ -16,7 +23,7 @@ module Twitterscrobble
   
           begin
               if !parsed_args[:stateless]
-                  @cfg = YAML.load(File.open(File.join(preferences_dir, PREFERENCES_FILE_NAME)))
+                  @cfg = YAML.load(File.open(full_prefs_file_path))
               else
                   @cfg = {}
               end
@@ -27,9 +34,9 @@ module Twitterscrobble
           @cfg.merge!(parsed_args) # args override cfg
   
           if @cfg[:logfile]
-              @logger = Logger.new(@cfg[:logfile])
+              @logger = SimpleLogger.new(@cfg[:logfile])
           else
-              @logger = Logger.new(STDOUT)
+              @logger = SimpleLogger.new(STDOUT)
           end
   
           if @cfg[:loglevel]
@@ -38,10 +45,9 @@ module Twitterscrobble
               @logger.level = Logger::WARN
           end
   
-          if @logger.debug?
-              @logger.debug("Effective preferences:")
-              @cfg.each{|key, value| @logger.debug("\t#{key} = #{value}")}
-          end
+          @logger.debug("Command line preferences: #{parsed_args.reject{|a| a == :twitter_password}.inspect}")
+          @logger.debug("Effective preferences after merging in preferences file #{full_prefs_file_path}:")
+          @logger.debug(@cfg.inspect)
   
           if 0 < check_required_args.size
               msg = ""
@@ -54,20 +60,14 @@ module Twitterscrobble
       def save
           unless @cfg[:no_save]
               Dir.mkdir(preferences_dir) if !File.exist?(preferences_dir)
-              prefs_file = File.join(preferences_dir, PREFERENCES_FILE_NAME)
               
-              File.open(prefs_file, 'w') do |out|
+              File.open(full_prefs_file_path, 'w') do |out|
                   save_cfg = @cfg.reject{|k, v| !TO_BE_SAVED.include?(k)}
-  
-                  if @logger.debug?
-                      @logger.debug("Writing preferences:")
-                      save_cfg.each{|key, value| @logger.debug("\t#{key} = #{value}")}
-                  end
-  
+                  @logger.debug("Writing preferences: #{save_cfg.inspect}")  
                   YAML.dump(save_cfg, out)
               end
               
-              File.new(prefs_file).chmod(0600)
+              File.new(full_prefs_file_path).chmod(0600)
           end
       end
   
@@ -200,5 +200,9 @@ module Twitterscrobble
   
           options
       end
-  end
+      
+      def full_prefs_file_path
+        File.join(preferences_dir, PREFERENCES_FILE_NAME)
+      end
+  end  
 end

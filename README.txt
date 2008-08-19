@@ -25,7 +25,7 @@ The following command prints the status line of recent tracks to stdout (not pos
 
 The following posts all recent tracks and store user names and password in the preferences file. This is suitable as the initial invocation, as it creates the preferences file for later invocation without the user detail.
 
-    twitterscrobble.rb --scrobbler-user boo --twitter-user FooBar --twitter-password bar
+    twitterscrobble.rb --scrobbler-user foo --twitter-user FooBar --twitter-password bar
 
 == REQUIREMENTS:
 
@@ -36,6 +36,18 @@ The following posts all recent tracks and store user names and password in the p
 == INSTALL:
 
 * sudo gem install twitterscrobble
+
+This script is probably run best from CRON:
+
+$> crontab -l
+# m h  dom mon dow   command
+* * * * * /home/nerab/projects/atom2nntp/workspace/twitterscrobble/bin/twitterscrobble --loglevel warn --logfile /home/nerab/.twitterscrobble/twitterscrobble.log 
+
+The entry to the user's crontab can be made with
+
+	crontab -e
+
+This will invoke the default editor for making changes to the user's crontab.
 
 = Author
 
