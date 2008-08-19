@@ -45,9 +45,9 @@ module Twitterscrobble
               @logger.level = Logger::WARN
           end
   
-          @logger.debug("Command line preferences: #{parsed_args.reject{|a| a == :twitter_password}.inspect}")
+          @logger.debug("Command line preferences: #{parsed_args.reject{|k,v| k == :twitter_password}.inspect}")
           @logger.debug("Effective preferences after merging in preferences file #{full_prefs_file_path}:")
-          @logger.debug(@cfg.inspect)
+          @logger.debug(@cfg.reject{|k,v| k == :twitter_password}.inspect)
   
           if 0 < check_required_args.size
               msg = ""
@@ -63,7 +63,7 @@ module Twitterscrobble
               
               File.open(full_prefs_file_path, 'w') do |out|
                   save_cfg = @cfg.reject{|k, v| !TO_BE_SAVED.include?(k)}
-                  @logger.debug("Writing preferences: #{save_cfg.inspect}")  
+                  @logger.debug("Writing preferences: #{save_cfg.reject{|k,v| k == :twitter_password}.inspect}")  
                   YAML.dump(save_cfg, out)
               end
               
