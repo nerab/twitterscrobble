@@ -41,7 +41,7 @@ This script is probably run best from CRON:
 
 $> crontab -l
 # m h  dom mon dow   command
-* * * * * /home/nerab/projects/atom2nntp/workspace/twitterscrobble/bin/twitterscrobble --loglevel warn --logfile /home/nerab/.twitterscrobble/twitterscrobble.log 
+* * * * * /home/nerab/projects/twitterscrobble/bin/twitterscrobble --loglevel warn --logfile /home/nerab/.twitterscrobble/twitterscrobble.log
 
 The entry to the user's crontab can be made with
 
