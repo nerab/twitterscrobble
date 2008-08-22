@@ -12,20 +12,20 @@ This application posts recently played tracks from last.fm to Twitter.
 
 For help use:
 
-    twitterscrobble.rb -h
+    twitterscrobble -h
 
 The following command reads all most recently played tracks from a last.fm account
 and posts them to Twitter. All settings are read from the preferences file.
 
-    twitterscrobble.rb
+    twitterscrobble
 
 The following command prints the status line of recent tracks to stdout (not posting to Twitter), assuming a history value of 0 and not saving state.
 
-    twitterscrobble.rb --no-post --history 0 --no-save
+    twitterscrobble --no-post --history 0 --no-save
 
 The following posts all recent tracks and store user names and password in the preferences file. This is suitable as the initial invocation, as it creates the preferences file for later invocation without the user detail.
 
-    twitterscrobble.rb --scrobbler-user foo --twitter-user FooBar --twitter-password bar
+    twitterscrobble --scrobbler-user foo --twitter-user FooBar --twitter-password bar
 
 == REQUIREMENTS:
 
@@ -48,6 +48,9 @@ The entry to the user's crontab can be made with
 	crontab -e
 
 This will invoke the default editor for making changes to the user's crontab.
+
+The library will announce itself as "twitterscrobble" on Twitter (by sending the appropriate source parameter). The twitter gem 
+still has a bug about this, so the source parameter will not work until  {this bug}[http://jnunemaker.lighthouseapp.com/projects/14843/tickets/11-source-parameter-does-not-get-through#ticket-11-1] has been fixed.
 
 = Author
 
