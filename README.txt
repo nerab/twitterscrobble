@@ -40,8 +40,9 @@ The following posts all recent tracks and store user names and password in the p
 This script is probably run best from CRON:
 
 $> crontab -l
-# m h  dom mon dow   command
-* * * * * /home/nerab/projects/twitterscrobble/bin/twitterscrobble --loglevel warn --logfile /home/nerab/.twitterscrobble/twitterscrobble.log
+ * * * * * /home/nerab/projects/twitterscrobble/bin/twitterscrobble --loglevel warn --logfile /home/nerab/.twitterscrobble/twitterscrobble.log
+
+This line will run twitterscrobble every minute.
 
 The entry to the user's crontab can be made with
 
