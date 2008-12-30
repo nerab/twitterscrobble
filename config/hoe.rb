@@ -11,7 +11,7 @@ EXTRA_DEPENDENCIES = [
         'scrobbler', '>= 0.1.1',
         'shorturl', '>= 0.8.4',
         'syntax', '>= 1.0.0',
-        'twitter', '>= 0.3.6']    # An array of rubygem dependencies [name, version]
+        'twitter', '>= 0.3.7']    # An array of rubygem dependencies [name, version]
 
 @config_file = "~/.rubyforge/user-config.yml"
 @config = nil

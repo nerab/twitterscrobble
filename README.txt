@@ -40,7 +40,7 @@ The following posts all recent tracks and store user names and password in the p
 This script is probably run best from CRON:
 
 $> crontab -l
- * * * * * /home/nerab/projects/twitterscrobble/bin/twitterscrobble --loglevel warn --logfile /home/nerab/.twitterscrobble/twitterscrobble.log
+ * * * * * twitterscrobble --loglevel warn --logfile /home/nerab/.twitterscrobble/twitterscrobble.log
 
 This line will run twitterscrobble every minute.
 
@@ -50,8 +50,7 @@ The entry to the user's crontab can be made with
 
 This will invoke the default editor for making changes to the user's crontab.
 
-The library will announce itself as "twitterscrobble" on Twitter (by sending the appropriate source parameter). The twitter gem 
-still has a bug about this, so the source parameter will not work until  {this bug}[http://jnunemaker.lighthouseapp.com/projects/14843/tickets/11-source-parameter-does-not-get-through#ticket-11-1] has been fixed.
+The library will announce itself as "twitterscrobble" on Twitter.
 
 = Author
 
